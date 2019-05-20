@@ -1,0 +1,27 @@
+th{
+    text-align: center; 
+}
+.calendar-body td{
+    text-align: center;
+    cursor: pointer;
+}
+.calendar-body td:hover{
+    background-color: #e7bd03;
+    color: #fff;
+}
+.titleCalendar{
+    text-align: center;
+    font-size: 25px;
+    background-color:#e75703;
+    color: #fff;
+    padding: 10px 0px;
+}
+
+.bg-day{
+    background-color: #e7bd03;
+    color: #fff;
+}
+.bg-day-off{
+    background-color: #cccccc;
+    cursor: default;
+}

@@ -3,18 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Calendar</title>
-
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
-          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/calendar.css" />
 </head>
 <body>
-<div class="container col-sm-4 col-md-7 col-lg-4 mt-5">
-    <div class="card">
-        <h3 class="card-header" id="monthAndYear"></h3>
-        <table class="table table-bordered table-responsive-sm" id="calendar">
+    <div class="container col-sm-12 mt-2">
+        <h3 class="display-4 titleCalendar" id="monthYear"></h3>
+        <table class="table table-bordered" id="calendar">
             <thead>
             <tr>
                 <th>Sun</th>
@@ -26,16 +22,9 @@
                 <th>Sat</th>
             </tr>
             </thead>
-
-            <tbody id="calendar-body">
-
-            </tbody>
+            <tbody id="calendar-tbody" class="calendar-body"></tbody>
         </table>
-        <br/>
-       
     </div>
-</div>
-<script src="js/calendar.js"></script>
-
 </body>
+<script src="js/calendar.js"></script>
 </html>
