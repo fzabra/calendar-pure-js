@@ -52,15 +52,19 @@ function buildCalendar(currentMonth, currentYear) {
                 }
                 cell.appendChild(cellText);
                 row.appendChild(cell);
-                dateDay++;
                 var eClass = document.createElement("p");
                 eClass.className = 'evText';
+                eClass.setAttribute("id", "evday"+dateDay);
                 cell.appendChild(eClass);
-                var getData = localStorage.getItem("8")
-                eClass.innerHTML = getData;
                 cell.addEventListener("click", function () {
                     addEvent(this.id);
                 });
+                for (var f = 0; f < localStorage.length; f++){
+                    if(dateDay == localStorage.key(f)){
+                        eClass.innerHTML = localStorage.getItem(localStorage.key(f))
+                    }              
+                }
+                dateDay++;
             }
         }
         tbody.appendChild(row);
@@ -74,25 +78,27 @@ function daysInMonth(iMonth, iYear) {
 }
 
 function addEvent(e) {
+    eventDataModal = document.getElementById("evday"+e).textContent;
     var formEvent = "<div class='modal-header'>";
-    formEvent +="<h5 class='modal-title' id='exampleModalLabel'>Create Event</h5>";
+    formEvent +="<h3 class='display-4' id='exampleModalLabel'>Create Event</h3>";
     formEvent +="<button type='button' class='close' data-dismiss='modal' aria-label='Close'>";
     formEvent +="<span aria-hidden='true'>&times;</span>";
     formEvent +="</button>";
     formEvent +="</div>";
     formEvent +="<div class='modal-body'>";
-    formEvent +="<h3>Add event to " + e + " "+ monthsOfYear[currentMonth] + " " + currentYear; ;
-    formEvent +="<textarea id='evt-details' onfocusin='disableSendButton("+ e +")'></textarea>";
+    formEvent +="<p>Add event to " + e + " "+ monthsOfYear[currentMonth] + " " + currentYear +"</p>" ;
+    formEvent +="<textarea class='evField' id='evt-details' onfocusin='disableSendButton()'>"+ eventDataModal +"</textarea>";
     formEvent +="</div>";
     formEvent +="<div class='modal-footer'>";
     formEvent +="<button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>";
+    formEvent +="<button type='button' class='btn btn-primary' data-dismiss='modal' onclick='deleteEvent(" + e + ");'>Delete</button>";
     formEvent +="<button type='button' class='btn btn-primary' onclick='save(" + (e ? e : "") + ")' data-dismiss='modal' id='btSend'>Add</button>";
     formEvent +="</div>";
     dayClick = document.getElementById("formAddEvent");
     dayClick.innerHTML = formEvent;
 }
 
-function disableSendButton(e){
+function disableSendButton(){
     eventData = document.getElementById("evt-details").value;
     console.log(eventData);
     if(eventData == ""){
@@ -105,4 +111,11 @@ function disableSendButton(e){
 function save(e){
     eventData = document.getElementById("evt-details").value;
     localStorage.setItem(e, JSON.stringify(eventData));
+    buildCalendar(currentMonth, currentYear);
+}
+
+function deleteEvent(e){
+    eventData = document.getElementById("evt-details").value;
+    localStorage.removeItem(e, JSON.stringify(eventData));
+    buildCalendar(currentMonth, currentYear);
 }
